@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven-3.9'
+    }
+
     environment {
         DOCKER_IMAGE = 'junkkari/temperature-converter:latest'
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
@@ -58,8 +62,8 @@ pipeline {
         stage('Deploy to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}",
-                                                  usernameVariable: 'DOCKER_USER',
-                                                  passwordVariable: 'DOCKER_PASS')]) {
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS')]) {
                     bat "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
                     bat "docker push ${env.DOCKER_IMAGE}"
                 }
