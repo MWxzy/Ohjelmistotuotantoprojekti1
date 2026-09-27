@@ -56,7 +56,7 @@ pipeline {
 
         stage('Run Docker Image (Local Verification)') {
             steps {
-                bat "docker run --rm ${env.DOCKER_IMAGE}"
+                bat "docker run --rm ${env.DOCKER_IMAGE} ls -la /app"
             }
         }
 
