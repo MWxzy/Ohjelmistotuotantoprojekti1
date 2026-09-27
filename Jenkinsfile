@@ -8,6 +8,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'junkkari/temperature-converter:latest'
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
+        PATH = "C:\\Users\\kaspe\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
     }
 
     stages {
