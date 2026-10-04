@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: TemperatureConverterTest
+Test set: database.DatabaseManagerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in TemperatureConverterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.203 s -- in database.DatabaseManagerTest

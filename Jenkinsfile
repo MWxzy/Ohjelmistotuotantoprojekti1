@@ -6,60 +6,38 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = 'junkkari/temperature-converter:latest'
+        DOCKER_IMAGE = 'junkkari/temperature-converter-gui:latest'
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
         PATH = "C:\\Users\\kaspe\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
     }
 
     stages {
         stage('Checkout') {
-            steps {
-                checkout scm
-            }
+            steps { checkout scm }
         }
-
         stage('Build') {
-            steps {
-                bat 'mvn clean package'
-            }
+            steps { bat 'mvn clean package' }
         }
-
         stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
+            steps { bat 'mvn test' }
         }
-
         stage('Code Coverage') {
-            steps {
-                bat 'mvn jacoco:report'
-            }
+            steps { bat 'mvn jacoco:report' }
         }
-
         stage('Publish Test Results') {
-            steps {
-                junit '**/target/surefire-reports/*.xml'
-            }
+            steps { junit '**/target/surefire-reports/*.xml' }
         }
-
         stage('Publish Coverage Report') {
-            steps {
-                jacoco()
-            }
+            steps { jacoco() }
         }
-
         stage('Build Docker Image') {
-            steps {
-                bat "docker build -t ${env.DOCKER_IMAGE} ."
-            }
+            steps { bat "docker build -t ${env.DOCKER_IMAGE} ." }
         }
-
         stage('Run Docker Image (Local Verification)') {
             steps {
                 bat "docker run --rm --entrypoint ls ${env.DOCKER_IMAGE} -la /app"
             }
         }
-
         stage('Deploy to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}",

@@ -1,2 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 OTP1_inclass1_assignment,default,TemperatureConverter,0,35,0,4,0,5,0,7,0,5
+OTP1_inclass1_assignment,database,TempRecordDAO,35,0,0,0,13,0,2,0,2,0
+OTP1_inclass1_assignment,database,TemperatureUnitDAO,3,31,0,2,2,10,0,3,0,2
+OTP1_inclass1_assignment,database,DatabaseManager,6,32,0,0,3,9,1,2,1,2
+OTP1_inclass1_assignment,com.example.temperatureconverter,TempConverterApp,275,0,8,0,60,0,11,0,5,0

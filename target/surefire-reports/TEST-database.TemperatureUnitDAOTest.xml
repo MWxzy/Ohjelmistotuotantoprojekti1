@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="TemperatureConverterTest" time="0.022" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="database.TemperatureUnitDAOTest" time="0.077" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="h2.url" value="jdbc:h2:mem:test108227833778000;DB_CLOSE_DELAY=-1"/>
@@ -65,8 +65,5 @@
     <property name="maven.repo.local" value="C:\Users\kaspe\.m2\repository"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testFahrenheitToCelsius" classname="TemperatureConverterTest" time="0.007"/>
-  <testcase name="testCelsiusToFahrenheit" classname="TemperatureConverterTest" time="0.003"/>
-  <testcase name="testKelvinToCelsius" classname="TemperatureConverterTest" time="0.001"/>
-  <testcase name="testIsExtremeTemperature" classname="TemperatureConverterTest" time="0.004"/>
+  <testcase name="testGetAllUnitNames" classname="database.TemperatureUnitDAOTest" time="0.074"/>
 </testsuite>

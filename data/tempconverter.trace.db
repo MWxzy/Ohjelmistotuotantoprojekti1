@@ -1,0 +1,26 @@
+2026-10-04 19:55:43.287401+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "    CREATE TABLE IF NOT EXISTS temperature_record (\000a        id INT AUTO_INCREMENT PRIMARY KEY,\000a        [*]value DECIMAL(10,2) NOT NULL,\000a        from_unit_id INT NOT NULL,\000a        to_unit_id INT NOT NULL,\000a        result DECIMAL(10,2) NOT NULL,\000a        recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\000a        FOREIGN KEY (from_unit_id) REFERENCES temperature_unit(id),\000a        FOREIGN KEY (to_unit_id) REFERENCES temperature_unit(id)\000a    )\000a"; expected "identifier"; SQL statement:
+    CREATE TABLE IF NOT EXISTS temperature_record (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        value DECIMAL(10,2) NOT NULL,
+        from_unit_id INT NOT NULL,
+        to_unit_id INT NOT NULL,
+        result DECIMAL(10,2) NOT NULL,
+        recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (from_unit_id) REFERENCES temperature_unit(id),
+        FOREIGN KEY (to_unit_id) REFERENCES temperature_unit(id)
+    )
+ [42001-224]
+2026-10-04 19:55:43.395890+03:00 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "    CREATE TABLE IF NOT EXISTS temperature_record (\000a        id INT AUTO_INCREMENT PRIMARY KEY,\000a        [*]value DECIMAL(10,2) NOT NULL,\000a        from_unit_id INT NOT NULL,\000a        to_unit_id INT NOT NULL,\000a        result DECIMAL(10,2) NOT NULL,\000a        recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\000a        FOREIGN KEY (from_unit_id) REFERENCES temperature_unit(id),\000a        FOREIGN KEY (to_unit_id) REFERENCES temperature_unit(id)\000a    )\000a"; expected "identifier"; SQL statement:
+    CREATE TABLE IF NOT EXISTS temperature_record (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        value DECIMAL(10,2) NOT NULL,
+        from_unit_id INT NOT NULL,
+        to_unit_id INT NOT NULL,
+        result DECIMAL(10,2) NOT NULL,
+        recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (from_unit_id) REFERENCES temperature_unit(id),
+        FOREIGN KEY (to_unit_id) REFERENCES temperature_unit(id)
+    )
+ [42001-224]
