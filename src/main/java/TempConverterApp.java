@@ -1,5 +1,3 @@
-package com.example.temperatureconverter;
-
 import database.DatabaseManager;
 import database.TempRecordDAO;
 import database.TemperatureUnitDAO;
@@ -21,7 +19,6 @@ public class TempConverterApp extends Application {
     public void start(Stage primaryStage) {
         DatabaseManager.initializeDatabase();
 
-        // UI Components
         Label titleLabel = new Label("Temperature Converter");
         titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 

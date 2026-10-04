@@ -1,3 +1,15 @@
+FROM maven:3.9-eclipse-temurin-17 AS build
+
+WORKDIR /app
+
+COPY pom.xml .
+
+RUN mvn -B dependency:go-offline
+
+COPY src ./src
+
+RUN mvn -B clean package -DskipTests -Djavafx.platform=linux
+
 FROM eclipse-temurin:17-jdk-jammy
 
 RUN apt-get update && apt-get install -y \
@@ -11,6 +23,6 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]

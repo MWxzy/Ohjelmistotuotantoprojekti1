@@ -1,5 +1,5 @@
 TemperatureConverter.class
 database\DatabaseManager.class
 database\TempRecordDAO.class
+TempConverterApp.class
 database\TemperatureUnitDAO.class
-com\example\temperatureconverter\TempConverterApp.class
