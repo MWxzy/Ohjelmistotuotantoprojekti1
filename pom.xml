@@ -92,7 +92,7 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>TempConverterApp</mainClass>
+                                    <mainClass>Launcher</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
