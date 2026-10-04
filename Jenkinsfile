@@ -15,35 +15,46 @@ pipeline {
         stage('Checkout') {
             steps { checkout scm }
         }
+
         stage('Build') {
             steps { bat 'mvn clean package' }
         }
+
         stage('Test') {
             steps { bat 'mvn test' }
         }
+
         stage('Code Coverage') {
             steps { bat 'mvn jacoco:report' }
         }
+
         stage('Publish Test Results') {
             steps { junit '**/target/surefire-reports/*.xml' }
         }
+
         stage('Publish Coverage Report') {
             steps { jacoco() }
         }
+
         stage('Build Docker Image') {
-            steps { bat "docker build -t ${env.DOCKER_IMAGE} ." }
+            steps {
+                // --no-cache ensures the multi-stage build reruns inside Docker
+                bat "docker build --no-cache -t ${env.DOCKER_IMAGE} ."
+            }
         }
-        stage('Run Docker Image (Local Verification)') {
+
+        stage('Verify Image') {
             steps {
                 bat "docker run --rm --entrypoint ls ${env.DOCKER_IMAGE} -la /app"
             }
         }
+
         stage('Deploy to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${env.DOCKER_CREDENTIALS_ID}",
                         usernameVariable: 'DOCKER_USER',
                         passwordVariable: 'DOCKER_PASS')]) {
-                    bat "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
+                    bat "docker login -u ${env.DOCKER_USER} -p ${env.DOCKER_PASS}"
                     bat "docker push ${env.DOCKER_IMAGE}"
                 }
             }
