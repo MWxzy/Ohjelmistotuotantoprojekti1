@@ -1,3 +1,5 @@
+I18nTest.class
 database\TemperatureUnitDAOTest.class
-TemperatureConverterTest.class
 database\DatabaseManagerTest.class
+database\TempRecordDAOTest.class
+TemperatureConverterTest.class

@@ -8,9 +8,12 @@ RUN mvn -B dependency:go-offline
 
 COPY src ./src
 
-RUN mvn -B clean package -DskipTests -Djavafx.platform=linux
+RUN mvn -B clean verify -Djavafx.platform=linux
 
 FROM eclipse-temurin:17-jdk-jammy
+
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 RUN apt-get update && apt-get install -y \
     libgtk-3-0 \
@@ -25,4 +28,4 @@ WORKDIR /app
 
 COPY --from=build /app/target/OTP1_inclass1_assignment-1.0-SNAPSHOT.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-Dfile.encoding=UTF-8", "-jar", "/app/app.jar"]

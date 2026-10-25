@@ -6,12 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseManager {
-    private static final String DB_URL = "jdbc:h2:./data/tempconverter;DB_CLOSE_DELAY=-1";
+    private static final String DEFAULT_DB_URL = "jdbc:h2:./data/tempconverter;DB_CLOSE_DELAY=-1";
     private static final String USER = "sa";
     private static final String PASS = "";
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, USER, PASS);
+        String url = System.getProperty("h2.url", DEFAULT_DB_URL);
+        return DriverManager.getConnection(url, USER, PASS);
     }
 
     public static void initializeDatabase() {

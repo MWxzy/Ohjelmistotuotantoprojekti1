@@ -8,6 +8,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'junkkari/temperature-converter-gui:latest'
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
+        MAVEN_OPTS = '-Dfile.encoding=UTF-8'
         PATH = "C:\\Users\\kaspe\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
     }
 
@@ -16,16 +17,8 @@ pipeline {
             steps { checkout scm }
         }
 
-        stage('Build') {
-            steps { bat 'mvn clean package' }
-        }
-
-        stage('Test') {
-            steps { bat 'mvn test' }
-        }
-
-        stage('Code Coverage') {
-            steps { bat 'mvn jacoco:report' }
+        stage('Build and Test') {
+            steps { bat 'mvn -B clean verify' }
         }
 
         stage('Publish Test Results') {
@@ -58,6 +51,12 @@ pipeline {
                     bat "docker push ${env.DOCKER_IMAGE}"
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/site/jacoco/**, target/reports/**', allowEmptyArchive: true
         }
     }
 }

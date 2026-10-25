@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>I18n.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OTP1_inclass1_assignment</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">I18n.java</span></div><h1>I18n.java</h1><pre class="source lang-java linenums">import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+
+public final class I18n {
+
+    public static final String BUNDLE_NAME = &quot;MessagesBundle&quot;;
+
+<span class="fc" id="L14">    private static ResourceBundle bundle = load(Locale.US);</span>
+
+    private I18n() {
+    }
+
+    public static ResourceBundle load(Locale locale) {
+<span class="fc" id="L20">        return ResourceBundle.getBundle(BUNDLE_NAME, locale, new Utf8Control());</span>
+    }
+
+    public static void setLocale(Locale locale) {
+<span class="fc" id="L24">        bundle = load(locale);</span>
+<span class="fc" id="L25">    }</span>
+
+    public static Locale getLocale() {
+<span class="fc" id="L28">        return bundle.getLocale();</span>
+    }
+
+    public static String get(String key) {
+<span class="fc" id="L32">        return bundle.getString(key);</span>
+    }
+
+    public static boolean contains(String key) {
+<span class="fc" id="L36">        return bundle.containsKey(key);</span>
+    }
+
+    public static String format(String key, Object... arguments) {
+<span class="fc" id="L40">        return String.format(bundle.getLocale(), get(key), arguments);</span>
+    }
+
+    private static final class Utf8Control extends ResourceBundle.Control {
+
+        @Override
+        public ResourceBundle newBundle(String baseName, Locale locale, String format,
+                                        ClassLoader loader, boolean reload)
+                throws IllegalAccessException, InstantiationException, IOException {
+
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (!&quot;java.properties&quot;.equals(format)) {</span>
+<span class="fc" id="L51">                return super.newBundle(baseName, locale, format, loader, reload);</span>
+            }
+
+<span class="fc" id="L54">            String resourceName = toResourceName(toBundleName(baseName, locale), &quot;properties&quot;);</span>
+<span class="fc" id="L55">            InputStream input = loader.getResourceAsStream(resourceName);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (input == null) {</span>
+<span class="fc" id="L57">                return null;</span>
+            }
+
+<span class="fc" id="L60">            try (InputStream in = input;</span>
+<span class="fc" id="L61">                 Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {</span>
+<span class="fc" id="L62">                return new PropertyResourceBundle(reader);</span>
+            }
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
